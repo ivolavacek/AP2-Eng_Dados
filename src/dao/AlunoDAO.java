@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import models.Aluno;
+import models.Contrato;
 
 public class AlunoDAO {
 
@@ -57,6 +58,9 @@ public class AlunoDAO {
     
                 if (rowsAffected > 0) {
                     System.out.println("Telefone atualizado com sucesso!");
+
+                    Aluno alunoAtualizado = getAlunoById(aluno.getIdAluno());
+                    aluno.setTelefone(alunoAtualizado.getTelefone());
                 } else {
                     System.out.println("Nenhum aluno encontrado com o ID especificado.");
                 }
@@ -78,6 +82,9 @@ public class AlunoDAO {
     
                 if (rowsAffected > 0) {
                     System.out.println("Email atualizado com sucesso!");
+
+                    Aluno alunoAtualizado = getAlunoById(aluno.getIdAluno());
+                    aluno.setEmail(alunoAtualizado.getEmail());
                 } else {
                     System.out.println("Nenhum aluno encontrado.");
                 }

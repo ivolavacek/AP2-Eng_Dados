@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 
+import models.Aluno;
 import models.Professor;
 
 public class ProfessorDAO {
@@ -103,6 +104,9 @@ public class ProfessorDAO {
     
                 if (rowsAffected > 0) {
                     System.out.println("Especialidade atualizada com sucesso!");
+
+                    Professor professorAtualizado = getProfessorById(professor.getIdProfessor());
+                    professor.setEspecialidade(professorAtualizado.getEspecialidade());
                 } else {
                     System.out.println("Nenhum professor encontrado.");
                 }
