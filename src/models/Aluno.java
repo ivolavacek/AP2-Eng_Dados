@@ -11,7 +11,6 @@ public class Aluno {
     private String telefone;
     private String email;
 
-    
     public Aluno(int idAluno, String nome, LocalDate dataNascimento, String telefone, String email) {
         this.idAluno = idAluno;
         this.nome = nome;
@@ -90,5 +89,4 @@ public class Aluno {
     public String toString() {
         return idAluno + " | " + nome + " | " + dataNascimento + " | " + idade + " | " + telefone + " | " + email;
     }
-
 }

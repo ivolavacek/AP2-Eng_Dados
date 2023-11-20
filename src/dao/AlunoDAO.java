@@ -143,7 +143,7 @@ public class AlunoDAO {
             String sql = "SELECT * FROM aluno";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet rst = pstm.executeQuery()) {
+                ResultSet rst = pstm.executeQuery()) {
 
                 while (rst.next()) {
                     Aluno aluno = new Aluno();

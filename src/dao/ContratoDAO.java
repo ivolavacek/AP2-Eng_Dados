@@ -229,7 +229,7 @@ public class ContratoDAO {
             String sql = "SELECT * FROM contrato";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet rst = pstm.executeQuery()) {
+                ResultSet rst = pstm.executeQuery()) {
 
                 while (rst.next()) {
                     Contrato contrato = new Contrato();
