@@ -1,5 +1,6 @@
 package models;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Aula {
 
@@ -13,7 +14,12 @@ public class Aula {
     private Time horarioFim;
     private String diaSemana;
 
+    private ArrayList<Aluno> alunos;
+
     
+ 
+
+
     public Aula(int idAula, String nome, Time horarioInicio, Time horarioFim, String diaSemana) {
         this.idAula = idAula;
         this.nome = nome;
@@ -47,6 +53,12 @@ public class Aula {
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
         this.diaSemana = diaSemana;
+    }
+
+
+    public ArrayList<Aluno> addAlunoAula(Aluno aluno){
+        this.alunos.add(aluno);
+        return alunos;
     }
 
     
@@ -98,5 +110,12 @@ public class Aula {
         this.diaSemana = diaSemana;
 
     }
-        
+   public ArrayList<Aluno> getAlunos() {
+        return alunos;
+    }
+
+
+    public void setAlunos(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
+    }
 }
