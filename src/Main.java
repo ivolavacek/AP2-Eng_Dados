@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import models.Aluno;
 import models.Aula;
@@ -255,7 +256,7 @@ public class Main {
         aula1.addAlunoAula(aluno2);
         aula1.addAlunoAula(aluno1);
         aulaDAO.insertAlunoAula(aula1);
-
+        
         // Método de busca
         System.out.println("\n----------------");
         System.out.println("Busca de uma aula específica\n");
@@ -268,13 +269,23 @@ public class Main {
         aula2.setNome("Aeróbica");
         aulaDAO.updateAula(aula2);
         System.out.println(aulaDAO.getAula(2));
+        
+        // Método para consultar todas as aulas
+        System.out.println("\n----------------");
+        System.out.println("Método para consultar todas as aulas\n");
+
+        List<Aula> todasAulas = aulaDAO.getAllAulas();
+        for (Aula aula : todasAulas) {
+            System.out.println(aula);
+            System.out.println(); // Adiciona uma linha em branco entre cada aula para melhor leitura
+        }
 
         // Método de exclusão
         System.out.println("\n----------------");
         System.out.println("Exclusão de uma aula específica\n");
         aulaDAO.deleteAula(aula2);
 
-
+        
 
     }
 }

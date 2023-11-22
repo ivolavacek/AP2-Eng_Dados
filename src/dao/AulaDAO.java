@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import models.Aluno;
 import models.Aula;
@@ -67,6 +67,7 @@ public class AulaDAO {
             throw new RuntimeException(e);
         }
     }
+    
 
     public Aula getAula(int idAula) {
         Aula aula = null;
@@ -120,6 +121,64 @@ public class AulaDAO {
         }
         return aula;
     }
+
+        public ArrayList<Aula> getAllAulas() {
+        ArrayList<Aula> aulas = new ArrayList<>();
+        String sql = "SELECT a.idAula, a.nome, a.horarioInicio, a.horarioFim, a.diaSemana, a.fk_idProfessor, " +
+                     "p.nome AS professorNome, p.especialidade, " +
+                     "al.idAluno, al.nome AS alunoNome, al.dataNascimento, al.idade, al.telefone, al.email " +
+                     "FROM Aula a " +
+                     "JOIN Professor p ON a.fk_idProfessor = p.idProfessor " +
+                     "LEFT JOIN Aluno_has_Aula aa ON a.idAula = aa.fk_idAula " +
+                     "LEFT JOIN Aluno al ON aa.fk_idAluno = al.idAluno " +
+                     "ORDER BY a.idAula";
+
+        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                Aula aula = null;
+                while (rs.next()) {
+                    int currentIdAula = rs.getInt("idAula");
+                    if (aula == null || aula.getIdAula() != currentIdAula) {
+                        if (aula != null) {
+                            aulas.add(aula);
+                        }
+                        aula = new Aula();
+                        aula.setIdAula(currentIdAula);
+                        aula.setNome(rs.getString("nome"));
+                        aula.setHorarioInicio(rs.getTime("horarioInicio"));
+                        aula.setHorarioFim(rs.getTime("horarioFim"));
+                        aula.setDiaSemana(rs.getString("diaSemana"));
+
+                        Professor professor = new Professor();
+                        professor.setIdProfessor(rs.getInt("fk_idProfessor"));
+                        professor.setNome(rs.getString("professorNome"));
+                        professor.setEspecialidade(rs.getString("especialidade"));
+                        aula.setProfessor(professor);
+                        aula.setAlunos(new ArrayList<>());
+                    }
+                    if (rs.getInt("idAluno") != 0) {
+                        Aluno aluno = new Aluno();
+                        aluno.setIdAluno(rs.getInt("idAluno"));
+                        aluno.setNome(rs.getString("alunoNome"));
+                        aluno.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                        aluno.setIdade(rs.getInt("idade"));
+                        aluno.setTelefone(rs.getString("telefone"));
+                        aluno.setEmail(rs.getString("email"));
+                        aula.getAlunos().add(aluno);
+                    }
+                }
+                
+                if (aula != null) {
+                    aulas.add(aula);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return aulas;
+    }
+
+    
     public void deleteAula(Aula aula) {
         String sqlDeleteAlunoAula = "DELETE FROM Aluno_has_Aula WHERE fk_idAula = ?";
         try (PreparedStatement pstm = connection.prepareStatement(sqlDeleteAlunoAula)) {

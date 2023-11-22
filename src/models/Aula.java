@@ -14,7 +14,7 @@ public class Aula {
     private Time horarioFim;
     private String diaSemana;
 
-    private ArrayList<Aluno> alunos;
+    private ArrayList<Aluno> alunos = new ArrayList<>();
 
     
  
@@ -62,8 +62,9 @@ public class Aula {
 
     public void addAlunoAula(Aluno aluno){
         this.alunos.add(aluno);
-  
     }
+        
+  
 
     
     public int getIdAula() {
