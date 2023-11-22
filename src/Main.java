@@ -236,21 +236,21 @@ public class Main {
         }
 
         // Criação das instâncias de Aulas com professores
-        Aula aula1 = new Aula(1, prof3, "Yoga", Time.valueOf("08:00:00"), Time.valueOf("09:00:00"), "Segunda-feira");
-        Aula aula2 = new Aula(2, prof4, "Pilates", Time.valueOf("10:00:00"), Time.valueOf("11:00:00"), "Terça-feira");
+        Aula aula1 = new Aula(prof3, "Yoga", Time.valueOf("08:00:00"), Time.valueOf("09:00:00"), "Seg");
+        Aula aula2 = new Aula(prof4, "Pilates", Time.valueOf("10:00:00"), Time.valueOf("11:00:00"), "Ter");
 
         // Criação da instância do AulaDAO
         AulaDAO aulaDAO = new AulaDAO(connection);
 
         // Método de inserção
         System.out.println("\n----------------");
-        System.out.println("Inserção de dados na tabela 'Aula'\n");
+        System.out.println("Insercao de dados na tabela 'Aula'\n");
 
         aulaDAO.createAula(aula1);
         aulaDAO.createAula(aula2);
 
-        System.out.println(aula1);
-        System.out.println(aula2);
+        System.out.println(aulaDAO.getAula(1));
+        System.out.println(aulaDAO.getAula(2));
 
         // Adicionar alunos às aulas
         aula1.addAlunoAula(aluno1);
@@ -258,7 +258,6 @@ public class Main {
         aula1.addAlunoAula(aluno3);
         aula2.addAlunoAula(aluno1);
         aula2.addAlunoAula(aluno4);
-        System.out.println(aula1);
         aulaDAO.insertAlunoAula(aula1);
         aulaDAO.insertAlunoAula(aula2);
 
@@ -270,7 +269,8 @@ public class Main {
 
         // Método de atualização
         System.out.println("\n----------------");
-        System.out.println("Atualização de dados na tabela 'Aula'\n");
+        System.out.println("Atualizacao de dados na tabela 'Aula'\n");
+        System.out.println(aulaDAO.getAula(2));
         aula2.setNome("Aeróbica");
         aulaDAO.updateAula(aula2);
         System.out.println(aulaDAO.getAula(2));
@@ -288,7 +288,9 @@ public class Main {
         // Método de exclusão
         System.out.println("\n----------------");
         System.out.println("Exclusão de uma aula específica\n");
+        System.out.println(aulaDAO.getAula(2));
         aulaDAO.deleteAula(aula2);
+        System.out.println(aulaDAO.getAula(2));
 
         
 

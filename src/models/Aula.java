@@ -13,27 +13,8 @@ public class Aula {
 
     private ArrayList<Aluno> alunos = new ArrayList<>();
 
-
     public Aula() {
     }
-
-
-    public Aula(int idAula, String nome, Time horarioInicio, Time horarioFim, String diaSemana) {
-        this.idAula = idAula;
-        this.nome = nome;
-        this.horarioInicio = horarioInicio;
-        this.horarioFim = horarioFim;
-        this.diaSemana = diaSemana;
-    }
-
-
-    public Aula(String nome, Time horarioInicio, Time horarioFim, String diaSemana) {
-        this.nome = nome;
-        this.horarioInicio = horarioInicio;
-        this.horarioFim = horarioFim;
-        this.diaSemana = diaSemana;
-    }
-
 
     public Aula(Professor professor, String nome, Time horarioInicio, Time horarioFim, String diaSemana) {
         this.professor = professor;
@@ -123,7 +104,7 @@ public class Aula {
         if (alunos != null && !alunos.isEmpty()) {
             alunoInfo = " | Alunos: ";
             for (Aluno aluno : alunos) {
-                alunoInfo += "[ " + aluno.toString() + " ]";
+                alunoInfo += "\n[ " + aluno.toString() + " ]";
             }
         }
 
@@ -131,7 +112,7 @@ public class Aula {
             " | Nome: " + nome +
             " | Horário Início: " + horarioInicio +
             " | Horário Fim: " + horarioFim +
-            " | Dia da Semana: " + diaSemana + " | Prof ID: " +
+            " | Dia da Semana: " + diaSemana + "\nProf ID: " +
             professorInfo +
             alunoInfo;
     }

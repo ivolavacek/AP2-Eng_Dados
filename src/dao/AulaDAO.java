@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import models.Aluno;
 import models.Aula;
@@ -30,6 +29,9 @@ public class AulaDAO {
             pstm.setTime(3, aula.getHorarioInicio());
             pstm.setTime(4, aula.getHorarioFim());
             pstm.setString(5, aula.getDiaSemana());
+
+            pstm.execute();
+
             try (ResultSet rst = pstm.getGeneratedKeys()) {
                 while (rst.next()) {
                     aula.setIdAula(rst.getInt(1));
@@ -46,6 +48,9 @@ public class AulaDAO {
             try(PreparedStatement pstm = connection.prepareStatement(sql)){
                 pstm.setInt(1, aluno.getIdAluno());
                 pstm.setInt(2, aula.getIdAula());
+
+                pstm.execute();
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -63,6 +68,7 @@ public class AulaDAO {
             pstm.setInt(6, aula.getIdAula());
 
             pstm.executeUpdate();
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
