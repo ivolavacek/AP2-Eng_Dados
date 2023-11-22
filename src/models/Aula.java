@@ -60,9 +60,9 @@ public class Aula {
     }
 
 
-    public ArrayList<Aluno> addAlunoAula(Aluno aluno){
+    public void addAlunoAula(Aluno aluno){
         this.alunos.add(aluno);
-        return alunos;
+  
     }
 
     
