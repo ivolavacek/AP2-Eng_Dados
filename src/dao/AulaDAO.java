@@ -39,6 +39,7 @@ public class AulaDAO {
             throw new RuntimeException(e);
         }
     }
+
     public void insertAlunoAula(Aula aula){
         for (Aluno aluno : aula.getAlunos()) {
             String sql = "INSERT INTO Aluno_has_Aula (fk_idAluno, fk_idAula) VALUES (?, ?)";
@@ -49,7 +50,6 @@ public class AulaDAO {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     public void updateAula(Aula aula) {

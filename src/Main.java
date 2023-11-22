@@ -253,10 +253,15 @@ public class Main {
         System.out.println(aula2);
 
         // Adicionar alunos às aulas
-        aula1.addAlunoAula(aluno2);
         aula1.addAlunoAula(aluno1);
+        aula1.addAlunoAula(aluno2);
+        aula1.addAlunoAula(aluno3);
+        aula2.addAlunoAula(aluno1);
+        aula2.addAlunoAula(aluno4);
+        System.out.println(aula1);
         aulaDAO.insertAlunoAula(aula1);
-        
+        aulaDAO.insertAlunoAula(aula2);
+
         // Método de busca
         System.out.println("\n----------------");
         System.out.println("Busca de uma aula específica\n");

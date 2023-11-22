@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Aula {
 
-    
-
-    
     private int idAula;
     private Professor professor;
     private String nome;
@@ -15,9 +12,6 @@ public class Aula {
     private String diaSemana;
 
     private ArrayList<Aluno> alunos = new ArrayList<>();
-
-    
- 
 
 
     public Aula() {
@@ -66,7 +60,6 @@ public class Aula {
         
   
 
-    
     public int getIdAula() {
         return idAula;
     }
@@ -113,16 +106,16 @@ public class Aula {
 
     public void setDiaSemana(String diaSemana) {
         this.diaSemana = diaSemana;
-
     }
+
    public ArrayList<Aluno> getAlunos() {
         return alunos;
     }
 
-
     public void setAlunos(ArrayList<Aluno> alunos) {
         this.alunos = alunos;
     }
+
     @Override
     public String toString() {
         String professorInfo = professor != null ? professor.toString() : "Sem Professor";
@@ -138,7 +131,7 @@ public class Aula {
             " | Nome: " + nome +
             " | Horário Início: " + horarioInicio +
             " | Horário Fim: " + horarioFim +
-            " | Dia da Semana: " + diaSemana +
+            " | Dia da Semana: " + diaSemana + " | Prof ID: " +
             professorInfo +
             alunoInfo;
     }

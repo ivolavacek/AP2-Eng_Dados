@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 
-import models.Aluno;
 import models.Professor;
 
 public class ProfessorDAO {

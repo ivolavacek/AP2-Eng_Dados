@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import models.Aluno;
-import models.Contrato;
 
 public class AlunoDAO {
 
