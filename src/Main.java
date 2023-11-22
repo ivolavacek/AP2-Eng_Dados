@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import models.Aluno;
 import models.Contrato;
+import models.Professor;
 import dao.ConnectionFactory;
 import dao.AlunoDAO;
 import dao.ContratoDAO;
+import dao.ProfessorDAO;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -78,6 +80,7 @@ public class Main {
             System.out.println(aluno);
         }
 
+
         System.out.println("\n----------------");
         System.out.println("Insercao de dados na tabela 'Contrato'\n");
 
@@ -133,13 +136,14 @@ public class Main {
         System.out.println(cdao.getContratoByAluno(aluno5));
         
         System.out.println("\n----------------");
-        System.out.println("Delecao de dados na tabela 'Aluno'\n");
+        System.out.println("Delecao de dados na tabela 'Contrato'\n");
+
+        System.out.println(cdao.getContratoByAluno(aluno4));
+        cdao.deleteContrato(contrato4);
+        cdao.getContratoByAluno(aluno4);
 
         System.out.println("\n----------------");
-        System.out.println("Metodo para consultar todos os elementos da tabela 'Aluno'\n");
-
-        System.out.println("teste");
-        System.out.println(contrato5);
+        System.out.println("Metodo para consultar todos os elementos da tabela 'Contrato'\n");
 
         ArrayList<Contrato> contratos = cdao.getAllContratos();
 
@@ -147,5 +151,59 @@ public class Main {
             System.out.println(contrato);
             System.out.println();
         }
-    }   
+
+        
+        System.out.println("\n----------------");
+        System.out.println("Insercao de dados na tabela 'Professor'\n");
+
+        ProfessorDAO pdao = new ProfessorDAO(connection);
+
+        Professor prof1 = new Professor("Paulo", "Lutas");
+        Professor prof2 = new Professor("Marlucia", "Personal Trainer");
+        Professor prof3 = new Professor("Rogerio", "Academia");
+        Professor prof4 = new Professor("Juliana", "Pilates");
+        
+        pdao.createProfessor(prof1);
+        pdao.createProfessor(prof2);
+        pdao.createProfessor(prof3);
+        pdao.createProfessor(prof4);
+
+        System.out.println(prof1);
+        System.out.println(prof2);
+        System.out.println(prof3);
+        System.out.println(prof4);
+
+        System.out.println("\n----------------");
+        System.out.println("Metodo para consultar um elemento especifico da tabela 'Professor'\n");
+
+        Professor profX = pdao.getProfessorById(1);
+        Professor profY = pdao.getProfessorById(2);
+
+        System.out.println(profX);
+        System.out.println(profY);
+
+        System.out.println("\n----------------");
+        System.out.println("Atualizacao de dados na tabela 'Professor'\n");
+
+        System.out.println("Atualiza especialidade");
+        System.out.println(pdao.getProfessorById(4));
+        pdao.updateEspecialidade(prof4, "Academia");
+        System.out.println(pdao.getProfessorById(4));
+
+        System.out.println("\n----------------");
+        System.out.println("Delecao de dados na tabela 'Professor'\n");
+
+        System.out.println(pdao.getProfessorById(1));
+        pdao.deleteProfessor(prof1);
+        pdao.getProfessorById(1);
+
+        System.out.println("\n----------------");
+        System.out.println("Metodo para consultar todos os elementos da tabela 'Professor'\n");
+
+        ArrayList<Professor> professores = pdao.getAllProfessores();
+
+        for (Professor professor : professores) {
+            System.out.println(professor);
+        }
+    }
 }
