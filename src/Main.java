@@ -165,13 +165,14 @@ public class Main {
         System.out.println(cdao.getContratoByAluno(aluno5));
         
         System.out.println("\n----------------");
-        System.out.println("Delecao de dados na tabela 'Aluno'\n");
+        System.out.println("Delecao de dados na tabela 'Contrato'\n");
+
+        System.out.println(cdao.getContratoByAluno(aluno4));
+        cdao.deleteContrato(contrato4);
+        cdao.getContratoByAluno(aluno4);
 
         System.out.println("\n----------------");
-        System.out.println("Metodo para consultar todos os elementos da tabela 'Aluno'\n");
-
-        System.out.println("teste");
-        System.out.println(contrato5);
+        System.out.println("Metodo para consultar todos os elementos da tabela 'Contrato'\n");
 
         ArrayList<Contrato> contratos = cdao.getAllContratos();
 
@@ -180,43 +181,62 @@ public class Main {
             System.out.println();
         }
 
-        // Criação das instâncias de Professor
-        Professor professor1 = new Professor("João", "Yoga");
-        Professor professor2 = new Professor("Maria", "Pilates");
-
-        // Criação da instância do ProfessorDAO
-        ProfessorDAO professorDAO = new ProfessorDAO(connection);
-
-        // Método de inserção de professores
         System.out.println("\n----------------");
-        System.out.println("Inserção de dados na tabela 'Professor'\n");
+        System.out.println("Insercao de dados na tabela 'Professor'\n");
 
-        professorDAO.createProfessor(professor1);
-        professorDAO.createProfessor(professor2);
+        ProfessorDAO pdao = new ProfessorDAO(connection);
 
-        System.out.println(professor1);
-        System.out.println(professor2);
+        Professor prof1 = new Professor("Paulo", "Lutas");
+        Professor prof2 = new Professor("Marlucia", "Personal Trainer");
+        Professor prof3 = new Professor("Rogerio", "Academia");
+        Professor prof4 = new Professor("Juliana", "Pilates");
+        
+        pdao.createProfessor(prof1);
+        pdao.createProfessor(prof2);
+        pdao.createProfessor(prof3);
+        pdao.createProfessor(prof4);
 
-        // Método de busca por ID
+        System.out.println(prof1);
+        System.out.println(prof2);
+        System.out.println(prof3);
+        System.out.println(prof4);
+
         System.out.println("\n----------------");
-        System.out.println("Busca de um professor específico\n");
-        Professor professorBuscado = professorDAO.getProfessorById(professor1.getIdProfessor());
-        System.out.println(professorBuscado);
+        System.out.println("Metodo para consultar um elemento especifico da tabela 'Professor'\n");
 
-        // Método de atualização de especialidade
-        System.out.println("\n----------------");
-        System.out.println("Atualização de dados na tabela 'Professor'\n");
-        professorDAO.updateEspecialidade(professor2, "Musculação");
-        System.out.println(professorDAO.getProfessorById(professor2.getIdProfessor()));
+        Professor profX = pdao.getProfessorById(1);
+        Professor profY = pdao.getProfessorById(2);
 
-        // Método de exclusão de professor
+        System.out.println(profX);
+        System.out.println(profY);
+
         System.out.println("\n----------------");
-        System.out.println("Exclusão de um professor específico\n");
-        professorDAO.deleteProfessor(professor2);
+        System.out.println("Atualizacao de dados na tabela 'Professor'\n");
+
+        System.out.println("Atualiza especialidade");
+        System.out.println(pdao.getProfessorById(4));
+        pdao.updateEspecialidade(prof4, "Academia");
+        System.out.println(pdao.getProfessorById(4));
+
+        System.out.println("\n----------------");
+        System.out.println("Delecao de dados na tabela 'Professor'\n");
+
+        System.out.println(pdao.getProfessorById(1));
+        pdao.deleteProfessor(prof1);
+        pdao.getProfessorById(1);
+
+        System.out.println("\n----------------");
+        System.out.println("Metodo para consultar todos os elementos da tabela 'Professor'\n");
+
+        ArrayList<Professor> professores = pdao.getAllProfessores();
+
+        for (Professor professor : professores) {
+            System.out.println(professor);
+        }
 
         // Criação das instâncias de Aulas com professores
-        Aula aula1 = new Aula(1, professor1, "Yoga", Time.valueOf("08:00:00"), Time.valueOf("09:00:00"), "Segunda-feira");
-        Aula aula2 = new Aula(2, professor1, "Pilates", Time.valueOf("10:00:00"), Time.valueOf("11:00:00"), "Terça-feira");
+        Aula aula1 = new Aula(1, prof3, "Yoga", Time.valueOf("08:00:00"), Time.valueOf("09:00:00"), "Segunda-feira");
+        Aula aula2 = new Aula(2, prof4, "Pilates", Time.valueOf("10:00:00"), Time.valueOf("11:00:00"), "Terça-feira");
 
         // Criação da instância do AulaDAO
         AulaDAO aulaDAO = new AulaDAO(connection);
@@ -232,8 +252,8 @@ public class Main {
         System.out.println(aula2);
 
         // Adicionar alunos às aulas
-        aula1.getAlunos().add(aluno1); // Adicionando aluno1 à aula1
-        aula1.getAlunos().add(aluno2); // Adicionando aluno2 à aula1
+        aula1.addAlunoAula(aluno2);
+        aula1.addAlunoAula(aluno1);
         aulaDAO.insertAlunoAula(aula1);
 
         // Método de busca
@@ -257,8 +277,10 @@ public class Main {
 
 
     }
-
-
-
-
 }
+
+
+
+
+        
+
