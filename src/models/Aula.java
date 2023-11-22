@@ -20,6 +20,10 @@ public class Aula {
  
 
 
+    public Aula() {
+    }
+
+
     public Aula(int idAula, String nome, Time horarioInicio, Time horarioFim, String diaSemana) {
         this.idAula = idAula;
         this.nome = nome;
@@ -70,11 +74,11 @@ public class Aula {
         this.idAula = idAula;
     }
 
-    public Professor getprofessor() {
+    public Professor getProfessor() {
         return this.professor;
     }
 
-    public void setprofessor(Professor professor) {
+    public void setProfessor(Professor professor) {
         this.professor = professor;
     }
 
@@ -117,5 +121,24 @@ public class Aula {
 
     public void setAlunos(ArrayList<Aluno> alunos) {
         this.alunos = alunos;
+    }
+    @Override
+    public String toString() {
+        String professorInfo = professor != null ? professor.toString() : "Sem Professor";
+        String alunoInfo = "";
+        if (alunos != null && !alunos.isEmpty()) {
+            alunoInfo = " | Alunos: ";
+            for (Aluno aluno : alunos) {
+                alunoInfo += "[ " + aluno.toString() + " ]";
+            }
+        }
+
+        return "Aula ID: " + idAula +
+            " | Nome: " + nome +
+            " | Horário Início: " + horarioInicio +
+            " | Horário Fim: " + horarioFim +
+            " | Dia da Semana: " + diaSemana +
+            professorInfo +
+            alunoInfo;
     }
 }
